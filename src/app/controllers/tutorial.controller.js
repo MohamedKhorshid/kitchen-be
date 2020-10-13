@@ -1,4 +1,6 @@
 const db = require("../models");
+const request = require('request');
+const { json } = require("sequelize");
 const Tutorial = db.tutorials;
 const Op = db.Sequelize.Op;
 
@@ -143,4 +145,36 @@ exports.findAllPublished = (req, res) => {
           err.message || "Some error occurred while retrieving tutorials."
       });
     });
+};
+
+
+exports.getUserInformation = (req, res) => {
+    
+  // you need permission for most of these fields
+  const userFieldSet = 'id, name, about, email, accounts, link, is_verified, significant_other, relationship_status, website, picture, photos, feed';
+    console.log("Facebook access token" + req.headers.authorization);
+    var FBJson ;
+  const options = {
+    method: 'GET',
+    uri: `https://graph.facebook.com/v8.0/me`,
+    qs: {
+      access_token: req.headers.authorization,
+      fields: userFieldSet
+    },
+    headers: {
+        'content-type': 'application/json'
+    }
+  };
+  
+request(options, function(err, FBRes, body) {
+   FBJson = JSON.parse(body);
+  console.log(FBJson);
+  res.send(FBJson);
+  
+});
+ // request(options)
+  //  .then(fbRes => {
+   //   res.json(fbRes);
+  //  });
+  
 };

@@ -1,10 +1,14 @@
+const {verify} = require('../middleware.js')
 module.exports = app => {
   const tutorials = require("../controllers/tutorial.controller.js");
 
   var router = require("express").Router();
 
+  // Retrieve facebook userInformation with token
+  router.get("/userInfo", verify ,tutorials.getUserInformation);
+
   // Create a new Tutorial
-  router.post("/", tutorials.create);
+  router.post("/",verify, tutorials.create);
 
   // Retrieve all Tutorials
   router.get("/", tutorials.findAll);
@@ -24,5 +28,5 @@ module.exports = app => {
   // Delete all Tutorials
   router.delete("/", tutorials.deleteAll);
 
-  app.use('/api/resturant', router);
+  app.use('/kitchen-app', router);
 };
