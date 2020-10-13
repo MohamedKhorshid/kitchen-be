@@ -8,7 +8,7 @@
 
 Sample Services:
 
-1-POST/ URL: 192.168.99.100:3000/api/resturant
+1-POST/ URL: 192.168.99.100:3000/kitchen-app
 
 {
     "title":"mrmor",
@@ -17,7 +17,7 @@ Sample Services:
 
 }
 
-2- GET/ URL: 192.168.99.100:3000/api/resturant
+2- GET/ URL: 192.168.99.100:3000/kitchen-app
 
   [
     {
