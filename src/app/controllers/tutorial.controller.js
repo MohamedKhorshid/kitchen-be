@@ -153,7 +153,7 @@ exports.findAllPublished = (req, res) => {
 exports.getUserInformation = (req, res) => {
     
   // you need permission for most of these fields
-  const userFieldSet = 'id, name, about, email, accounts, link, is_verified, significant_other, relationship_status, website, picture, photos, feed';
+  const userFieldSet = 'id, name, about, email, accounts, link, is_verified, significant_other, relationship_status, website, picture.height(200), photos, feed';
     console.log("Facebook access token" + req.headers.authorization);
     var FBJson ;
   const options = {
