@@ -1,6 +1,8 @@
 const db = require("../models");
 const request = require('request');
 const { json } = require("sequelize");
+const UserServices = require( "../services/UserServices" );
+const UserServicesInstance = new UserServices();
 const Tutorial = db.tutorials;
 const Op = db.Sequelize.Op;
 
@@ -169,7 +171,13 @@ exports.getUserInformation = (req, res) => {
 request(options, function(err, FBRes, body) {
    FBJson = JSON.parse(body);
   console.log(FBJson);
+  console.log("FBJson.id === " + FBJson.id);
+  if(FBJson.id)  
+  {
+  UserServicesInstance.create(FBJson);
+  }
   res.send(FBJson);
+  
   
 });
  // request(options)
